@@ -15,7 +15,6 @@ const lights = new Lights()
 scene.add(lights.ambientLight)
 scene.add(lights.hemisphereLight)
 scene.add(lights.directionalLight)
-scene.add(lights.spotLight)
 scene.add(lights.pointLight)
 
 const world = new World(camera, scene)
@@ -30,17 +29,21 @@ renderer.setAnimationLoop(animate)
 camera.position.z = 0;
 
 // Boden und Wände erstellen
-const wallMaterial = new THREE.MeshBasicMaterial({ color: 0x2727a8, side: THREE.DoubleSide });
+//const wallMaterial = new THREE.MeshBasicMaterial({ color: 0xac7339, side: THREE.DoubleSide });
+const wallMaterial = new THREE.MeshPhongMaterial({ color: 0xac7339, side: THREE.DoubleSide });
+const floorMaterial = new THREE.MeshPhongMaterial({ color: 0x808080, side: THREE.DoubleSide });  // Boden in Grau
+
+
 
 // Boden
 const floorGeometry = new THREE.PlaneGeometry(10, 10);
-const floorMaterial = new THREE.MeshBasicMaterial({ color: 0x000000, side: THREE.DoubleSide });
+//const floorMaterial = new THREE.MeshBasicMaterial({ color: 0x808080, side: THREE.DoubleSide });
 const floor = new THREE.Mesh(floorGeometry, floorMaterial);
 floor.rotation.x = Math.PI / 2;
 scene.add(floor);
 
 // Wände
-const wallGeometry = new THREE.PlaneGeometry(15, 5);
+const wallGeometry = new THREE.PlaneGeometry(15, 6);
 
 // Linke Wand
 const leftWall = new THREE.Mesh(wallGeometry, wallMaterial);
@@ -64,28 +67,18 @@ const frontWall = new THREE.Mesh(wallGeometry, wallMaterial);
 frontWall.position.z = 7.5;
 scene.add(frontWall);
 
-// Licht hinzufügen
 
-
-//const pictureframe = new PictureFrame(scene)
-
-/*const light = new THREE.PointLight(0xffffff, 1, 100);
-light.position.set(0, 5, 5);
-scene.add(light);*/
-
-// Beispielbilder an den Wänden hinzufügen
 const textureLoader = new THREE.TextureLoader();
 
 
 
 
 
-// Bild an der linken Wand
-textureLoader.load('photos/images.jpeg', (texture) => {
+// Bild an der vordere Wand
+textureLoader.load('photos/monalisa.jpg', (texture) => {
     const pictureMaterial = new THREE.MeshBasicMaterial({ map: texture });
-    const picture = new THREE.Mesh(new THREE.PlaneGeometry(3, 2), pictureMaterial);
-    picture.position.set(-7.4, .5, 0);
-    picture.rotation.y = Math.PI / 2;
+    const picture = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), pictureMaterial);
+    picture.position.set(0, 0.5, -7.4);
     scene.add(picture);
 });
 
@@ -98,18 +91,21 @@ textureLoader.load('photos/edvard-munch-schrei-beruehmtes-gemaelde.jpg', (textur
     scene.add(picture);
 });
 
-// Bild an der hinteren Wand
-textureLoader.load('photos/mensch-proportionen-leonardo-da-vinci-vitruvianischer-mensch-kreis-100~_v-img__3__4__xl_-f4c197f4ebda83c772171de6efadd3b29843089f.jpg', (texture) => {
+// Bild an der linke Wand
+textureLoader.load('photos/csm_leonardo-da-vinci-vitruvianischer-mensch_3befc41428.jpg.pagespeed.ce.FgwBSJ3N-D.jpg', (texture) => {
     const pictureMaterial = new THREE.MeshBasicMaterial({ map: texture });
-    const picture = new THREE.Mesh(new THREE.PlaneGeometry(3, 2), pictureMaterial);
-    picture.position.set(0, 0.5, -7);
+    const picture = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), pictureMaterial);
+    picture.position.set(-7.4, 0.5, 0);
+    picture.rotation.y = Math.PI / 2;
     scene.add(picture);
+    
 });
 
+//hintere wand
 textureLoader.load('photos/van-Gogh-Sternennacht.jpg', (texture) => {
     const pictureMaterial = new THREE.MeshBasicMaterial({ map: texture });
-    const picture = new THREE.Mesh(new THREE.PlaneGeometry(3, 2), pictureMaterial);
-    picture.position.set(0, 1, 4.9);
+    const picture = new THREE.Mesh(new THREE.PlaneGeometry(3, 3), pictureMaterial);
+    picture.position.set(0, 0.5, 7.4);
     picture.rotation.y = 3.14
     scene.add(picture);
 });

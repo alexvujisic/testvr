@@ -6,33 +6,34 @@ class World{
         this.scene = scene
         this.camera = camera
 
-        this.pictureframe = new PictureFrame(this.scene)
-        const planeGeometry = new THREE.PlaneGeometry( 10, 10 )
-        const planeMaterial = new THREE.MeshStandardMaterial({color: 0xffffff})
-        this.plane = new THREE.Mesh (planeGeometry, planeMaterial)
-        this.plane.receiveShadow = true
-        planeMaterial.side = THREE.DoubleSide //THREE.FrontSide THREE.BackSide
-        
-        this.plane.rotation.x = -Math.PI / 2
-        
-        this.raycaster = new THREE.Raycaster();
-        this.pointer = new THREE.Vector2();
+        //rechte wand 
+        this.rightpictureframe = new PictureFrame(this.scene, 1.570, 1, 2, 2, 7.4, 0.5)
 
-        //this.onPointerMove = this.onPointerMove.bind(this)
+        //linke Wand
+        this.leftpictureframe = new PictureFrame(this.scene, -1.57, 1.2, 2, 2, -7.4, 0.5)
+
+        //vordere wand
+        this.frontpictureframe = new PictureFrame(this.scene, 3.14, 1.2, 2, 2, 0, 0.5, -7.4)
+
+        //hintere wand
+        this.backpictureframe = new PictureFrame(this.scene, 0, 1.8, 3, 3, 0, 0.5, 7.4)
     }
 
     animate(){
-        if(this.pictureframe.isLoaded){
-            this.pictureframe.animate()
+        if(this.rightpictureframe.isLoaded){
+            this.rightpictureframe.animate()
         }
-    
-        this.raycaster.setFromCamera( this.pointer, this.camera );
-        const intersects = this.raycaster.intersectObjects( this.scene.children );
-        //console.log(intersects.length)
 
-        this.plane.material.color.set(0xffffff)
-        for ( let i = 0; i < intersects.length; i ++ ) {
-            //intersects[ i ].object.material.color.set( 0xff0000 );
+        if(this.leftpictureframe.isLoaded){
+            this.leftpictureframe.animate()
+        }
+
+        if(this.frontpictureframe.isLoaded){
+            this.frontpictureframe.animate()
+        }
+
+        if(this.backpictureframe.isLoaded){
+            this.backpictureframe.animate()
         }
     }
 }
