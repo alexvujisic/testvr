@@ -31,16 +31,48 @@ camera.position.z = 0;
 // Boden und Wände erstellen
 //const wallMaterial = new THREE.MeshBasicMaterial({ color: 0xac7339, side: THREE.DoubleSide });
 const wallMaterial = new THREE.MeshPhongMaterial({ color: 0xac7339, side: THREE.DoubleSide });
-const floorMaterial = new THREE.MeshPhongMaterial({ color: 0x808080, side: THREE.DoubleSide });  // Boden in Grau
 
+
+const textureLoader = new THREE.TextureLoader();
+
+const ceilTexture = textureLoader.load('photos/il_fullxfull.4227498063_dlzn.jpg.webp');  // Pfad zum Bild
 
 
 // Boden
-const floorGeometry = new THREE.PlaneGeometry(10, 10);
-//const floorMaterial = new THREE.MeshBasicMaterial({ color: 0x808080, side: THREE.DoubleSide });
-const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+const floorGeometry = new THREE.PlaneGeometry( 50, 50 );  // Width and height of the plane
+//const floorMaterial = new THREE.MeshPhongMaterial( { color: 0x808080, side: THREE.DoubleSide } );  // Color it gray for now
+
+const floorMaterial = new THREE.MeshPhongMaterial({
+    //map: floorTexture,         // Textur für die Oberfläche
+    side: THREE.DoubleSide,    // Zeigt beide Seiten der Geometrie an
+    color: 0x808080,
+});
+
+const floor = new THREE.Mesh( floorGeometry, floorMaterial );
+
+// Rotate the floor to be horizontal (plane geometries are vertical by default)
 floor.rotation.x = Math.PI / 2;
-scene.add(floor);
+floor.position.y = -3
+// Add shadow properties to the floor
+floor.receiveShadow = true;
+scene.add(floor)
+
+// Decke
+const ceilGeometry = new THREE.PlaneGeometry( 16, 16 );  // Width and height of the plane
+const ceilMaterial = new THREE.MeshPhongMaterial({
+    map: ceilTexture,         // Textur für die Oberfläche
+    side: THREE.DoubleSide,    // Zeigt beide Seiten der Geometrie an
+    color: 0x808080,
+});
+const ceil = new THREE.Mesh( ceilGeometry, ceilMaterial );
+
+// Rotate the floor to be horizontal (plane geometries are vertical by default)
+ceil.rotation.x = Math.PI / 2;
+ceil.position.y = 3
+// Add shadow properties to the floor
+ceil.receiveShadow = true;
+scene.add( ceil );
+
 
 // Wände
 const wallGeometry = new THREE.PlaneGeometry(15, 6);
@@ -68,8 +100,6 @@ frontWall.position.z = 7.5;
 scene.add(frontWall);
 
 
-const textureLoader = new THREE.TextureLoader();
-
 
 
 
@@ -88,6 +118,7 @@ textureLoader.load('photos/edvard-munch-schrei-beruehmtes-gemaelde.jpg', (textur
     const picture = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), pictureMaterial);
     picture.position.set(7.4, 0.5, 0);
     picture.rotation.y = -Math.PI / 2;
+    
     scene.add(picture);
 });
 

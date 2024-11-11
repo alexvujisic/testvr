@@ -7,6 +7,12 @@ let moveLeft = false;
 let moveRight = false;
 let rotateLeft = false;
 let rotateRight = false;
+let rotateUp = false;
+let rotateDown = false;
+
+// Grenzen für die Rotation (90 Grad nach oben und unten)
+const maxUpAngle = Math.PI / 2;  // 90 Grad nach oben
+const maxDownAngle = -Math.PI / 2;  // 90 Grad nach unten
 
 // Funktion, um die Steuerung zu aktivieren
 export function setupControls(camera, renderer, scene) {
@@ -31,6 +37,12 @@ export function setupControls(camera, renderer, scene) {
             case 'ArrowRight':
                 rotateRight = true;
                 break;
+            case 'ArrowUp':
+                rotateUp = true;
+                break;
+            case 'ArrowDown':
+                rotateDown = true;
+                break;
         }
     });
 
@@ -54,6 +66,12 @@ export function setupControls(camera, renderer, scene) {
             case 'ArrowRight':
                 rotateRight = false;
                 break;
+            case 'ArrowUp':
+                rotateUp = false;
+                break;
+            case 'ArrowDown':
+                rotateDown = false;
+                break;
         }
     });
 
@@ -67,7 +85,19 @@ export function setupControls(camera, renderer, scene) {
         if (moveLeft) camera.position.x -= moveSpeed;
         if (moveRight) camera.position.x += moveSpeed;
 
-        // Kamera drehen
+        // Vertikale Rotation der Kamera (Pitch)
+        if (rotateUp) {
+            if (camera.rotation.x < maxUpAngle) {
+                camera.rotation.x += rotateSpeed;
+            }
+        }
+        if (rotateDown) {
+            if (camera.rotation.x > maxDownAngle) {
+                camera.rotation.x -= rotateSpeed;
+            }
+        }
+
+        // Horizontale Rotation der Kamera (Yaw)
         if (rotateLeft) camera.rotation.y += rotateSpeed;
         if (rotateRight) camera.rotation.y -= rotateSpeed;
 
