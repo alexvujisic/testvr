@@ -9,11 +9,11 @@ class PictureFrame{
         this.loadFrame(rotation, scaleX, scaleY, scaleZ, positionX, positionY, positionZ)
     }
 
-    animate(){
+    /*animate(){
         //console.log("animiert frame")
 
         
-    }
+    }*/
 
     loadFrame(rotation, scaleX, scaleY, scaleZ, positionX, positionY, positionZ = 0){
         const loader = new GLTFLoader();

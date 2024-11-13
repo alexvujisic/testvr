@@ -37,13 +37,14 @@ const textureLoader = new THREE.TextureLoader();
 
 const ceilTexture = textureLoader.load('photos/il_fullxfull.4227498063_dlzn.jpg.webp');  // Pfad zum Bild
 
+const floorTexture = textureLoader.load('photos/undef_src_sa_picid_794028_x_1000_type_whitesh_quality_100_image.jpg');
 
 // Boden
 const floorGeometry = new THREE.PlaneGeometry( 50, 50 );  // Width and height of the plane
-//const floorMaterial = new THREE.MeshPhongMaterial( { color: 0x808080, side: THREE.DoubleSide } );  // Color it gray for now
+
 
 const floorMaterial = new THREE.MeshPhongMaterial({
-    //map: floorTexture,         // Textur für die Oberfläche
+    map: floorTexture,         // Textur für die Oberfläche
     side: THREE.DoubleSide,    // Zeigt beide Seiten der Geometrie an
     color: 0x808080,
 });

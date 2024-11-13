@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import PictureFrame from './pictureframe.js'
+import Pilar from './pilar.js'
 
 class World{
     constructor(camera, scene){
@@ -17,24 +18,16 @@ class World{
 
         //hintere wand
         this.backpictureframe = new PictureFrame(this.scene, 0, 1.8, 3, 3, 0, 0.5, 7.4)
+
+        this.rightPilar = new Pilar(this.scene, 6.9, 6.9)
+
+        this.leftPilar = new Pilar(this.scene, -6.9, -6.9)
+
+        this.backPilar = new Pilar(this.scene, 6.9, -6.9)
+
+        this.frontPilar = new Pilar(this.scene, -6.9, 6.9)
     }
 
-    animate(){
-        if(this.rightpictureframe.isLoaded){
-            this.rightpictureframe.animate()
-        }
-
-        if(this.leftpictureframe.isLoaded){
-            this.leftpictureframe.animate()
-        }
-
-        if(this.frontpictureframe.isLoaded){
-            this.frontpictureframe.animate()
-        }
-
-        if(this.backpictureframe.isLoaded){
-            this.backpictureframe.animate()
-        }
-    }
+    animate(){}
 }
 export default World
