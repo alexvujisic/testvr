@@ -29,48 +29,45 @@ renderer.setAnimationLoop(animate)
 camera.position.z = 0;
 
 // Boden und Wände erstellen
-//const wallMaterial = new THREE.MeshBasicMaterial({ color: 0xac7339, side: THREE.DoubleSide });
 const wallMaterial = new THREE.MeshPhongMaterial({ color: 0xac7339, side: THREE.DoubleSide });
-
 
 const textureLoader = new THREE.TextureLoader();
 
-const ceilTexture = textureLoader.load('photos/il_fullxfull.4227498063_dlzn.jpg.webp');  // Pfad zum Bild
+const ceilTexture = textureLoader.load('photos/il_fullxfull.4227498063_dlzn.jpg.webp');  //deckenbild
 
-const floorTexture = textureLoader.load('photos/undef_src_sa_picid_794028_x_1000_type_whitesh_quality_100_image.jpg');
+const floorTexture = textureLoader.load('photos/undef_src_sa_picid_794028_x_1000_type_whitesh_quality_100_image.jpg'); //marmorboden
 
 // Boden
-const floorGeometry = new THREE.PlaneGeometry( 50, 50 );  // Width and height of the plane
+const floorGeometry = new THREE.PlaneGeometry( 50, 50 );  
 
 
 const floorMaterial = new THREE.MeshPhongMaterial({
     map: floorTexture,         // Textur für die Oberfläche
-    side: THREE.DoubleSide,    // Zeigt beide Seiten der Geometrie an
-    color: 0x808080,
+    side: THREE.DoubleSide,    
+    //color: 0xf2f0f0,
 });
 
 const floor = new THREE.Mesh( floorGeometry, floorMaterial );
 
-// Rotate the floor to be horizontal (plane geometries are vertical by default)
-floor.rotation.x = Math.PI / 2;
+floor.rotation.x = Math.PI / 2; //fläche horizonatal 
 floor.position.y = -3
-// Add shadow properties to the floor
+
 floor.receiveShadow = true;
 scene.add(floor)
 
 // Decke
-const ceilGeometry = new THREE.PlaneGeometry( 16, 16 );  // Width and height of the plane
+const ceilGeometry = new THREE.PlaneGeometry( 16, 16 );  
 const ceilMaterial = new THREE.MeshPhongMaterial({
-    map: ceilTexture,         // Textur für die Oberfläche
-    side: THREE.DoubleSide,    // Zeigt beide Seiten der Geometrie an
-    color: 0x808080,
+    map: ceilTexture,         
+    side: THREE.DoubleSide,    
+    //color: 0x808080,
 });
 const ceil = new THREE.Mesh( ceilGeometry, ceilMaterial );
 
-// Rotate the floor to be horizontal (plane geometries are vertical by default)
+
 ceil.rotation.x = Math.PI / 2;
 ceil.position.y = 3
-// Add shadow properties to the floor
+
 ceil.receiveShadow = true;
 scene.add( ceil );
 

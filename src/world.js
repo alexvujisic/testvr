@@ -19,6 +19,7 @@ class World{
         //hintere wand
         this.backpictureframe = new PictureFrame(this.scene, 0, 1.8, 3, 3, 0, 0.5, 7.4)
 
+        //pilars
         this.rightPilar = new Pilar(this.scene, 6.9, 6.9)
 
         this.leftPilar = new Pilar(this.scene, -6.9, -6.9)
